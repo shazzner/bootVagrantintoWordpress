@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Boots a Vagrant Instance into Wordpress
-# See README.md for more details and usage
-
 #Config
 BOX="ubuntu/trusty64"
 
@@ -34,6 +31,15 @@ mkdir ./$1
 (cd ./$1/; vagrant box add $BOX)
 (cd ./$1/; sed -i "s@base@$BOX@g" ./Vagrantfile)
 (cd ./$1/; sed -i 's/# config.vm.network "forwarded_port"/config.vm.network "forwarded_port"/g' ./Vagrantfile)
+
+(cd ./$1/; sed -i -f - ./Vagrantfile &> /dev/null <<EOF
+/^end$/ i\\
+  config.vm.provider "virtualbox" do |vb| \\
+    vb.customize ["modifyvm", :id, "--memory", "1024"] \\
+  end \\
+
+EOF
+)
 
 (cd ./$1/; sed -i -f - ./Vagrantfile &> /dev/null <<EOF
 /^end$/ i\\
