@@ -2,6 +2,8 @@
 A simple script that creates a vagrant box with wordpress ready to go
 
 ## About
+It should be noted this script is still in development!
+
 Doing web development might require having several separate instances of Wordpress going on your development machine. This script will spin up a Vagrant box and setup wordpress.
 
 It will launch the site on localhost on port 8080. Future versions might set a specific IP and add a domain name to your hosts file.
