@@ -9,12 +9,20 @@ It will launch the site on localhost on port 8080. Future versions might set a s
 At the moment it won't run through the install script automatically so you still have to go to http://localhost:8080/wp-admin/install.php to finialize the steps.
 
 ## Requirements
-Running this on Ubuntu 15.04 x64, but should work on newer versions.
+Tested on:
 
-You'll need Vagrant, ChefDK, and Vagrant-berkshef in order to run the script successfully:
-1. Install the latest version of [Vagrant](http://www.vagrantup.com/downloads.html)
-2. Install the latest version of [ChefDK](https://downloads.chef.io/chef-dk/)
-3. Install the Vagrant Berkshelf plugin:
+1. Ubuntu 15.04 x64, but should work on newer versions.
+2. Linux Mint 17.3 Cinnamon 64-bit
+
+You'll need VirtualBox, Vagrant, ChefDK, and Vagrant-berkshef in order to run the script successfully:
+
+1. Install VirtualBox and it's kernel extensions, the packaged version seems to work fine
+
+        $ sudo apt-get install virtualbox virtualbox-dkms
+
+2. Install the latest version of [Vagrant](http://www.vagrantup.com/downloads.html)
+3. Install the latest version of [ChefDK](https://downloads.chef.io/chef-dk/)
+4. Install the Vagrant Berkshelf plugin:
 
         $ vagrant plugin install vagrant-berkshelf
 
