@@ -5,12 +5,12 @@ BOX="ubuntu/trusty64"
 
 if [ -z $1 ]
 then
-    echo "No path name specified, please give your project a name ie. 'Wordpress-Dev'"
+    echo "No box name specified, please give your project a name ie. 'Wordpress-Dev'"
     exit 1
 fi
 
 read -p "This will create a new vagrant wordpress box. This may take some time, are you sure? [y/n]" -n 1 -r
-echo    # (optional) move to a new line
+echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
     echo "Exiting!"
@@ -30,6 +30,11 @@ mkdir ./$1
 (cd ./$1/; vagrant init)
 (cd ./$1/; vagrant box add $BOX)
 (cd ./$1/; sed -i "s@base@$BOX@g" ./Vagrantfile)
+
+# Sets up as a public box
+#(cd ./$1/; sed -i 's/# config.vm.network "public_network"/config.vm.network "public_network"/g' ./Vagrantfile)
+
+# Sets up on localhost:8080
 (cd ./$1/; sed -i 's/# config.vm.network "forwarded_port"/config.vm.network "forwarded_port"/g' ./Vagrantfile)
 
 (cd ./$1/; sed -i -f - ./Vagrantfile &> /dev/null <<EOF
